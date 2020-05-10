@@ -262,7 +262,10 @@ mkdir /mnt/nfs-share/install
 ```
 
 You can upload the model to run the same way you just uploaded the installer. 
-
+Finally, make sure to install the environment-module package. 
+```
+sudo yum install -y environment-modules
+```
 # Running CONVERGE
 Running CONVERGE is pretty straightforward: 
 
@@ -271,6 +274,8 @@ First specify the host you need to run on, you need to create a machinefile. In 
 ```
 sed 's/$/:36/' /etc/opt/oci-hpc/hostfile > machinefile
 ```
+
+## Version 3
 Here is a script to run with IntelMPI 2019 as included in version 3.0.11 of CONVERGE. 
 ```
 #!/bin/bash
@@ -280,3 +285,26 @@ export DATE=`date '+%Y%m%d%H%M'`
 module load /mnt/nfs-share/install/Convergent_Science/Environment/modulefiles/CONVERGE/CONVERGE-IntelMPI/3.0.11
 mpirun -n $CORES -ppn 36 -iface enp94s0f0 -genv I_MPI_FABRICS=shm:ofi -genv I_MPI_FALLBACK=0 -genv I_MPI_PIN=yes -f `pwd`/machinefile -genv I_MPI_DEBUG=6 converge-intelmpi -c -S | tee intel.$CORES.$DATE.out
 ```
+
+<!---
+## Version 2.4
+Here is a script to run with IntelMPI 2018 as included in version 2.4 of CONVERGE. You can install Intel MPI through those commands: 
+
+```
+wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+sudo rpm --import GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+sudo yum-config-manager --add-repo=https://yum.repos.intel.com/mpi
+sudo yum install -y environment-modules 
+sudo yum install -y intel-mpi-2018.4-057 intel-mpi-samples-2018.4-274 
+```
+
+```
+#!/bin/bash
+export CORES=288
+export RLM_LICENSE=2765@IP
+export DATE=`date '+%Y%m%d%H%M'`
+source /opt/intel/compilers_and_libraries_2018/linux/mpi/intel64/bin/mpivars.sh
+module load <install_root>/Convergent_Science/Environment/modulefiles/CONVERGE/CONVERGE-IntelMPI/<version> 
+mpirun -n $CORES -ppn 36 -iface enp94s0f0 -genv I_MPI_FABRICS=shm:ofi -genv I_MPI_FALLBACK=0 -genv I_MPI_PIN=yes -f `pwd`/machinefile -genv I_MPI_DEBUG=6 converge-intelmpi -c -S | tee intel.$CORES.$DATE.out
+```
+ --->
