@@ -307,4 +307,7 @@ module load <install_root>/Convergent_Science/Environment/modulefiles/CONVERGE/C
 mpirun -n $CORES -ppn 36 -iface enp94s0f0 -genv I_MPI_FABRICS=shm:ofi -genv I_MPI_FALLBACK=0  -genv I_MPI_FALLBACK=0 
 -genv I_MPI_PIN=yes -genv I_MPI_EXTRA_FILESYSTEM 0 -f `pwd`/machinefile -genv I_MPI_DEBUG=6
 converge-intelmpi -S | tee intel.$CORES.$DATE.out
+cewje
+ncqe
+ewmc
 ```
