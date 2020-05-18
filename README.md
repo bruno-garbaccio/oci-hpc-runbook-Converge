@@ -298,7 +298,7 @@ sudo yum install -y environment-modules
 sudo yum install -y intel-mpi-2018.4-057 intel-mpi-samples-2018.4-274 
 ```
 
-```bash
+```shell
 #!/bin/bash
 export CORES=288
 export RLM_LICENSE=2765@IP
