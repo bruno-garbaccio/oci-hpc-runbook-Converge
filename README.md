@@ -298,7 +298,7 @@ sudo yum install -y environment-modules
 sudo yum install -y intel-mpi-2018.4-057 intel-mpi-samples-2018.4-274 
 ```
 
-```
+```bash
 #!/bin/bash
 export CORES=288
 export RLM_LICENSE=2765@IP
@@ -306,6 +306,7 @@ export DATE=`date '+%Y%m%d%H%M'`
 source /opt/intel/compilers_and_libraries_2018/linux/mpi/intel64/bin/mpivars.sh
 module load <install_root>/Convergent_Science/Environment/modulefiles/CONVERGE/CONVERGE-IntelMPI/<version> 
 mpirun -n $CORES -ppn 36 -iface enp94s0f0 -genv I_MPI_FABRICS=shm:ofi -genv I_MPI_FALLBACK=0  -genv I_MPI_FALLBACK=0 -genv I_MPI_PIN=yes \
+
 -genv I_MPI_EXTRA_FILESYSTEM 0 -f `pwd`/machinefile -genv I_MPI_DEBUG=6 converge-intelmpi -S | tee intel.$CORES.$DATE.out
 ```
  --->
