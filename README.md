@@ -216,8 +216,6 @@ sudo firewall-cmd --reload
 15.	Open TurboVNC or TigerVNC client. Enter the IP address connection as <public ip>:1
 
 
-
-
 # Accessing a VNC
 We will connect through an SSH tunnel to the instance. On your machine, connect using ssh
 PORT below will be the number that results from 5900 + N. N is the display number, if the output for N was 1, PORT is 5901, if the output was 9, PORT is 5909
@@ -277,13 +275,15 @@ sed 's/$/:36/' /etc/opt/oci-hpc/hostfile > machinefile
 
 ## Version 3
 Here is a script to run with IntelMPI 2019 as included in version 3.0.11 of CONVERGE. 
-```
+```bash
 #!/bin/bash
 export CORES=288
 export RLM_LICENSE=2765@IP
 export DATE=`date '+%Y%m%d%H%M'`
 module load /mnt/nfs-share/install/Convergent_Science/Environment/modulefiles/CONVERGE/CONVERGE-IntelMPI/3.0.11
-mpirun -n $CORES -ppn 36 -iface enp94s0f0 -genv I_MPI_FABRICS=shm:ofi -genv I_MPI_FALLBACK=0 -genv I_MPI_PIN=yes -f `pwd`/machinefile -genv I_MPI_DEBUG=6 converge-intelmpi -c -S | tee intel.$CORES.$DATE.out
+mpirun -n $CORES -ppn 36 -iface enp94s0f0 -genv I_MPI_FABRICS=shm:ofi -genv I_MPI_FALLBACK=0 \
+-genv I_MPI_PIN=yes -f `pwd`/machinefile -genv I_MPI_DEBUG=6  -genv I_MPI_EXTRA_FILESYSTEM 0 \
+converge-intelmpi -S | tee intel.$CORES.$DATE.out
 ```
 
 <!---
@@ -305,6 +305,6 @@ export DATE=`date '+%Y%m%d%H%M'`
 source /opt/intel/compilers_and_libraries_2018/linux/mpi/intel64/bin/mpivars.sh
 module load <install_root>/Convergent_Science/Environment/modulefiles/CONVERGE/CONVERGE-IntelMPI/<version> 
 mpirun -n $CORES -ppn 36 -iface enp94s0f0 -genv I_MPI_FABRICS=shm:ofi -genv I_MPI_FALLBACK=0  -genv I_MPI_FALLBACK=0 
--genv I_MPI_PIN=yes -genv I_MPI_EXTRA_FILESYSTEM 0 -f `pwd`/machinefile -genv I_MPI_DEBUG=6
+-genv I_MPI_PIN=yes -f `pwd`/machinefile -genv I_MPI_DEBUG=6
 converge-intelmpi -S | tee intel.$CORES.$DATE.out
 ```
