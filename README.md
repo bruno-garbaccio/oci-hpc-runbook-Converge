@@ -64,6 +64,8 @@ Depending on your OS, you will want to go with a specific method. If the HPC Clu
 
 ## Creation of Cluster Network through Marketplace
 Marketplace holds applications and images that can be deployed with our infrastructure.  For customers that want to use Oracle Linux, an HPC Cluster Network image is available and can be launched from directly within marketplace.
+We suggest launching the [CFD Ready Cluster](https://cloudmarketplace.oracle.com/marketplace/en_US/listing/75645211) that will contain librairies needed for CFD.
+
 1.	Within marketplace, select **Get App** at the top right.
 2.	Select the OCI Region then click **Sign In**.
 3.	Verify the version of the HPC Cluster image and then select the *Compartment* where the cluster will be launched. Accept the terms and conditions, then **Launch Stack**.
@@ -71,10 +73,11 @@ Marketplace holds applications and images that can be deployed with our infrastr
     1.	Select the desired **AD** for the compute shapes and the bastion.
     2.	Copy-paste your public **ssh key**
     3.	Type in the number of **Compute instances** for the cluster
+    4. Uncheck Install OpenFOAM
+    5. If you need more than 6TB of Shared disk space, check GlusterFS and select how many servers you would need. (6TB per server)
 5.	Click **Create**.
 6.	Navigate to *Terraform Actions* then click **Apply**. This will launch the CN provisioning.
 7.	Wait until the job shows ‘Succeeded’ then navigate to **Outputs** to obtain the bastion and compute node private IP’s. 
-
 
 ## Creation of Cluster Network through Manual Configuration
 Marketplace holds applications and images that can be deployed with our infrastructure.  For customers that want to use Oracle Linux, you can manually create a cluster network as follows:
