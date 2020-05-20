@@ -4,7 +4,7 @@
 This Runbook will take you through the process of deploying a CONVERGE cluster on Oracle Cloud with low latency networking between the compute nodes. Running CONVERGE on Oracle Cloud is quite straightforward, follow along this guide for all the tips and tricks.
 
 <p align="center">
-<img src="https://github.com/oci-hpc/oci-hpc-runbook-Converge/raw/master/Images/Screenshot 2019-07-09 at 14.50.19.png" height="300" >
+<img src="https://github.com/oci-hpc/oci-hpc-runbook-Converge/blob/master/converge.png" height="300" >
  </p>
  
 **Table of Contents**
