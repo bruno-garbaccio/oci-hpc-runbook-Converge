@@ -238,7 +238,7 @@ You can chose a VNC client that you prefer or use this guide to install on your 
 
 You can download the CONVERGE installer from the ConvergeCFD website or push it to your machine using scp. 
 ```
-scp /path/own/machine/STAR-CCM_version.zip opc@1.1.1.1:/home/opc/
+scp /path/own/machine/CONVERGE_version.zip opc@1.1.1.1:/home/opc/
 ```
 Another possibility is to upload the installer into object storage. 
 1.	In the main menu of the console, select Object Storage. 
@@ -261,6 +261,11 @@ Launch the installer on a shared location. By default, an HPC cluster has a NFS-
 ```
 mkdir /mnt/nfs-share/install
 /path/installscript.sh
+```
+It is also possible to launch the installation of CONVERGE via a silent mode. To do so, execute the following commands:
+```
+cd /path/to/installscript
+./INSTALL /your/absolute/install/directory/path
 ```
 
 You can upload the model to run the same way you just uploaded the installer. 
